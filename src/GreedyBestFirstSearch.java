@@ -4,15 +4,10 @@ public class GreedyBestFirstSearch {
 
     // Atın yapabileceği 8 olası hareket (Row değişimi, Col değişimi)
 // [cite: 11] (Knight moves in L shapes)
-    private static final int[][] DIRECTIONS = {
-            {-2, -1}, {-2, 1},
-            {-1, -2}, {-1, 2},
-            {1, -2}, {1, 2},
-            {2, -1}, {2, 1}
-    };
+    private static final int[][] DIRECTIONS = {{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
 
     public List<Node> greedyBestFirstSearch(Board board, Node startNode, Node targetNode) {
-     // Sadece hCost'a bakan PriorityQueue (Greedy Mantığı)
+        // Sadece hCost'a bakan PriorityQueue (Greedy Mantığı)
         PriorityQueue<Node> pq = new PriorityQueue<>((n1, n2) -> Double.compare(n1.hCost, n2.hCost));
         Set<String> visited = new HashSet<>();
 
@@ -50,7 +45,6 @@ public class GreedyBestFirstSearch {
                     }
                 }
             }
-            // -----------------------------------
         }
 
         return null; // Yol bulunamazsa

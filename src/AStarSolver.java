@@ -7,7 +7,7 @@ public class AStarSolver {
 
     public List<Node> findPath(Board board, Node startNode, Node targetNode) {
         PriorityQueue<Node> openList = new PriorityQueue<>();
-        HashSet<String> pathList = new HashSet<>(); // Ziyaret edilen düğümler
+        HashSet<String> visited = new HashSet<>(); // Ziyaret edilen düğümler
 
         startNode.gCost = 0;
         startNode.hCost = calculateHeuristic(startNode, targetNode);
@@ -22,9 +22,9 @@ public class AStarSolver {
             }
 
             String key = current.row + "," + current.col;
-            if (pathList.contains(key))
+            if (visited.contains(key))
                  continue;
-            pathList.add(key);
+            visited.add(key);
 
             // Atın 8 olası hareketine bak
             for (int i = 0; i < 8; i++) {
@@ -33,13 +33,13 @@ public class AStarSolver {
 
                 if (board.isSafe(newRow, newCol)) {
                     // gCost: Başlangıçtan buraya olan mesafe (Her adım 1 birim)
-                    int tempGCost = current.gCost + 1;
+                    double tempGCost = current.gCost + 1;
                     
                     Node neighbor = new Node(newRow, newCol, current);
                     neighbor.gCost = tempGCost;
                     neighbor.hCost = calculateHeuristic(neighbor, targetNode);
                     
-                    if (!pathList.contains(newRow + "," + newCol)) {
+                    if (!visited.contains(newRow + "," + newCol)) {
                         openList.add(neighbor);
                     }
                 }
@@ -50,7 +50,7 @@ public class AStarSolver {
 
     // Heuristic: Manhattan Mesafesi (Basit ve etkili)
     // At için tam doğru değildir ama hedefe yaklaştırır.
-    private int calculateHeuristic(Node a, Node b) {
+    private double calculateHeuristic(Node a, Node b) {
         return Math.abs(a.row - b.row) + Math.abs(a.col - b.col);
     }
 

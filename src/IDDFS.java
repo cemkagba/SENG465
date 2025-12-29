@@ -7,8 +7,7 @@ import java.util.*;
 public class IDDFS {
     private Board board;
     private int coinRow, coinCol;
-    private int bombRow, bombCol;
-    
+
     private int visitedNodeCount;
     private long executionTime;
     private List<Node> path;
@@ -18,19 +17,17 @@ public class IDDFS {
     private static final int[] rowMoves = {2, 2, -2, -2, 1, 1, -1, -1};
     private static final int[] colMoves = {1, -1, 1, -1, 2, -2, 2, -2};
 
-    public IDDFS(Board board, int bombRow, int bombCol, int coinRow, int coinCol) {
+    public IDDFS(Board board, int coinRow, int coinCol) {
         this.board = board;
-        this.bombRow = bombRow;
-        this.bombCol = bombCol;
         this.coinRow = coinRow;
         this.coinCol = coinCol;
-        
+
         this.visitedNodeCount = 0;
         this.path = new ArrayList<>();
         this.solutionFound = false;
     }
 
-   
+
     public void search(int startRow, int startCol) {
         long startTime = System.nanoTime();
 
@@ -40,7 +37,7 @@ public class IDDFS {
         while (maxDepth <= limit) {
             // Each time the deepness is increasing, this should reset.
             Set<String> visitedInThisIteration = new HashSet<>();
-            
+
             // start the search
             Node result = depthLimitedSearch(startRow, startCol, maxDepth, visitedInThisIteration, null);
 
@@ -53,13 +50,13 @@ public class IDDFS {
         }
 
         long endTime = System.nanoTime();
-        this.executionTime = (endTime - startTime) / 1_000_000; 
+        this.executionTime = (endTime - startTime) / 1_000_000;
     }
 
-    
+
     private Node depthLimitedSearch(int row, int col, int depthLimit, Set<String> visited, Node parent) {
         visitedNodeCount++;
-        
+
         Node currentNode = new Node(row, col, parent);
 
         if (row == coinRow && col == coinCol) {
@@ -69,7 +66,7 @@ public class IDDFS {
         int currentDepth = 0;
         Node temp = parent;
         while(temp != null) { currentDepth++; temp = temp.parent; }
-        
+
         if (currentDepth >= depthLimit) {
             return null;
         }
@@ -78,17 +75,17 @@ public class IDDFS {
         if (visited.contains(key)) {
             return null; // There is a cycle
         }
-        
-        visited.add(key); 
+
+        visited.add(key);
 
         for (int i = 0; i < 8; i++) {
             int newRow = row + rowMoves[i];
             int newCol = col + colMoves[i];
 
-            if (board.isSafe(newRow, newCol) && !(newRow == bombRow && newCol == bombCol)) {
-                
+            if (board.isSafe(newRow, newCol)) {
+
                 Node result = depthLimitedSearch(newRow, newCol, depthLimit, visited, currentNode);
-                
+
                 if (result != null) {
                     return result; // Çözüm bulundu, yukarı taşı
                 }
@@ -96,17 +93,17 @@ public class IDDFS {
         }
 
         // Backtracking
-        visited.remove(key); 
-        
+        visited.remove(key);
+
         return null;
     }
 
-    
+
     private void reconstructPath(Node goalNode) {
         path.clear();
         Node current = goalNode;
         while (current != null) {
-            path.add(0, current); 
+            path.add(0, current);
             current = current.parent;
         }
     }

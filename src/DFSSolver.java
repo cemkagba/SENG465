@@ -3,8 +3,8 @@ import java.util.*;
 public class DFSSolver {
 
     private static final int[][] MOVES = {
-        { 2, 1}, { 2,-1}, {-2, 1}, {-2,-1},
-        { 1, 2}, { 1,-2}, {-1, 2}, {-1,-2}
+            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
     };
 
     public static Node solve(Board board,
