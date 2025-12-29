@@ -1,12 +1,10 @@
-import static java.lang.Math.*;
-
-public class Node implements Comparable<Node> {
-    int row, col;
+public class Node implements Comparable<Node>{
+    int row,col;
     Node parent;
     double gCost; // Distance from start
     double hCost; // Distance to goal(heuristic)
 
-    public Node(int row, int col, Node parent) {
+    public Node(int row , int col , Node parent){
         this.row = row;
         this.col = col;
         this.parent = parent;
@@ -28,9 +26,9 @@ public class Node implements Comparable<Node> {
     }
 
     @Override
-    public int compareTo(Node other) {
+    public int compareTo(Node other){
 
-        if (this.getFCost() > other.getFCost()) {
+        if(this.getFCost() > other.getFCost()){
             return 1;
         } else if (this.getFCost() < other.getFCost()) {
             return -1;
@@ -39,7 +37,7 @@ public class Node implements Comparable<Node> {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj){
         if (this == obj) return true;
 
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -48,10 +46,10 @@ public class Node implements Comparable<Node> {
         return this.row == other.row && this.col == other.col;
     }
 
+
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return 31 * row + col;
     }
-
 
 }
