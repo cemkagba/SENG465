@@ -83,22 +83,22 @@ Visualize: Click on a row in the results table to see the path calculated by tha
 Reset: Use "CLEAR BOMBS" to remove obstacles or manually adjust positions.
 
 📂 Project Structure
-src
-└── main
-    └── java
-        └── com
-            └── knightpathfinder
-                ├── ModernUI.java       # Main JavaFX Application & UI Logic
-                ├── Board.java          # Grid and State Management
-                ├── Node.java           # Graph Node Structure
-                ├── PathFinder.java     # Interface for Algorithms
-                ├── algorithms          # (Logic classes)
-                │   ├── AStarSolver.java
-                │   ├── BFSSolver.java
-                │   ├── DFSSolver.java
-                │   ├── IDDFS.java
-                │   └── GreedyBestFirstSearch.java
-
+```text
+📦 src
+ └─ 📂 main
+    └─ 📂 java
+       └─ 📂 com
+          └─ 📂 knightpathfinder
+             ├── ☕ ModernUI.java           # Main JavaFX Application
+             ├── ☕ Board.java              # Grid Logic & State
+             ├── ☕ Node.java               # Graph Node Structure
+             ├── ☕ PathFinder.java         # Algorithm Interface
+             └─ 📂 algorithms
+                ├── ☕ AStarSolver.java
+                ├── ☕ BFSSolver.java
+                ├── ☕ DFSSolver.java
+                ├── ☕ IDDFS.java
+                └── ☕ GreedyBestFirstSearch.java
                 
 👨‍💻 Author
 
