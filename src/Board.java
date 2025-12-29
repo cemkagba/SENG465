@@ -15,11 +15,16 @@ public class Board {
         return r >= 0 && r < size && c >= 0 && c < size;
     }
 
-    public void setBomb(int row, int col) {
-        if (grid[row][col] == 2) {
-            System.out.println("Cannot place bomb on coin!");
-            return;
+    // YENİ EKLENEN METOT: Hücreyi temizle
+    public void setEmpty(int row, int col) {
+        if (isValidCoordinate(row, col)) {
+            grid[row][col] = 0;
         }
+    }
+
+    public void setBomb(int row, int col) {
+        // Coin üzerine bomba konulursa board bunu reddediyordu,
+        // Artık FXMain tarafında kontrol edeceğiz, burası sadece emri uygulasın.
         if (isValidCoordinate(row, col)) {
             grid[row][col] = 1;
         }
@@ -37,29 +42,16 @@ public class Board {
                grid[row][col] != 1;
     }
 
- public void printBoard(int knightR, int knightC) {
-    System.out.print("  ");
-    for (int i = 0; i < size; i++) {
-        System.out.print((char)('a' + i) + " ");
-    }
-    System.out.println();
-
-    for (int r = 0; r < size; r++) {
-        System.out.print((r + 1) + " ");
-        for (int c = 0; c < size; c++) {
-            if (r == knightR && c == knightC) {
-                System.out.print("K ");
-            } else if (grid[r][c] == 1) {
-                System.out.print("X ");
-            } else if (grid[r][c] == 2) {
-                System.out.print("C ");
-            } else {
-                System.out.print("- ");
+    // Konsol çıktısı için (eski kodun bozulmasın diye bıraktım)
+    public void printBoard(int knightR, int knightC) {
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (r == knightR && c == knightC) System.out.print("K ");
+                else if (grid[r][c] == 1) System.out.print("X ");
+                else if (grid[r][c] == 2) System.out.print("C ");
+                else System.out.print("- ");
             }
+            System.out.println();
         }
-        System.out.println();
     }
-}
-
-
 }
