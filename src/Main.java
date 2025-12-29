@@ -11,16 +11,16 @@ public class Main {
         System.out.println("--- KNIGHT A* PATHFINDING ---");
 
         // Start Position
-        System.out.print("Enter Knight Start Column (0-7): ");
-        int startCol = scanner.nextInt();
-        System.out.print("Enter Knight Start Row (0-7): ");
-        int startRow = scanner.nextInt();
+        System.out.print("Enter Knight Start Column (1-8): ");
+        int startCol = scanner.nextInt() - 1;
+        System.out.print("Enter Knight Start Row (1-8): ");
+        int startRow = scanner.nextInt() - 1;
 
         // Target Position
-        System.out.print("Enter Coin Column (0-7): ");
-        int coinCol = scanner.nextInt();
-        System.out.print("Enter Coin Row (0-7): ");
-        int coinRow = scanner.nextInt();
+        System.out.print("Enter Coin Column (1-8): ");
+        int coinCol = scanner.nextInt() - 1;
+        System.out.print("Enter Coin Row (1-8): ");
+        int coinRow = scanner.nextInt() - 1;
 
         board.setCoin(coinRow, coinCol);
 
@@ -28,13 +28,22 @@ public class Main {
         System.out.print("How many bombs do you want to place? ");
         int bombCount = scanner.nextInt();
 
-        for (int i = 0; i < bombCount; i++) {
-            System.out.print("Bomb " + (i + 1) + " Column: ");
-            int bCol = scanner.nextInt();
-            System.out.print("Bomb " + (i + 1) + " Row: ");
-            int bRow = scanner.nextInt();
-            board.setBomb(bRow, bCol);
-        }
+     for (int i = 0; i < bombCount; ) {
+    System.out.print("Bomb " + (i + 1) + " Column (1-8): ");
+    int bCol = scanner.nextInt() - 1;
+
+    System.out.print("Bomb " + (i + 1) + " Row (1-8): ");
+    int bRow = scanner.nextInt() - 1;
+
+    // Eğer bomba coin'in üstüne konulursa
+    if (bRow == coinRow && bCol == coinCol) {
+        System.out.println("❌ You cannot place a bomb on the coin! Try again.");
+        continue; // i artmaz, tekrar sorar
+    }
+
+    board.setBomb(bRow, bCol);
+    i++; // sadece geçerli bombada artar
+}
 
         System.out.println("\nInitial Board:");
         board.printBoard(startRow, startCol);
@@ -68,9 +77,9 @@ public class Main {
                 }
 
                 pathString.append("[")
-                          .append(node.col)
+                          .append(node.col + 1)
                           .append(",")
-                          .append(node.row)
+                          .append(node.row + 1)
                           .append("]");
 
                 if (i < path.size() - 1)
