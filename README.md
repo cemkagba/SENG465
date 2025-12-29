@@ -51,7 +51,7 @@ Clone the repository:
 
 Bash
 
-git clone https://github.com/yourusername/knight-pathfinder.git
+git clone -b Knight-UI https://github.com/cemkagba/SENG465.git
 cd knight-pathfinder
 Build the project using Maven:
 
