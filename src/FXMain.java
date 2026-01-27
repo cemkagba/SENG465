@@ -39,9 +39,9 @@ public class FXMain extends Application {
     
     // Obje Renkleri
     private static final Color PATH_COLOR = Color.web("#f1c40f");
-    private static final Color START_COLOR = Color.web("#3498db");
-    private static final Color TARGET_COLOR = Color.web("#e74c3c");
-    private static final Color BOMB_COLOR = Color.web("#2d3436");
+    private static final Color START_COLOR = Color.web("#08fff3ff");
+    private static final Color TARGET_COLOR = Color.web("#e5c14bff");
+    private static final Color BOMB_COLOR = Color.web("#f01515ff");
 
     // UI Bileşenleri
     private Tile[][] gridUI = new Tile[BOARD_SIZE][BOARD_SIZE];
@@ -158,76 +158,12 @@ public class FXMain extends Application {
         Scene scene = new Scene(root, 1100, 900);
         
         // --- CSS ILE TAM KOYU MOD TABLO ---
-        scene.getStylesheets().add("data:text/css," + getDarkTableCSS());
+        String cssPath = getClass().getResource("dark-table.css").toExternalForm();
+        scene.getStylesheets().add(cssPath);
         
         primaryStage.setTitle("Algoritma Karşılaştırıcı Pro (Dark Mode)");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    // --- DEEP DARK TABLO CSS ---
-    private String getDarkTableCSS() {
-        return 
-            ".table-view {" +
-            "   -fx-base: #1e1e1e;" +
-            "   -fx-control-inner-background: #1e1e1e;" +
-            "   -fx-background-color: #1e1e1e;" +
-            "   -fx-table-cell-border-color: transparent;" +
-            "   -fx-table-header-border-color: transparent;" +
-            "   -fx-padding: 5;" +
-            "}" +
-            // Header (Başlıklar)
-            ".table-view .column-header-background {" +
-            "   -fx-background-color: #2c2c2c;" +
-            "   -fx-background-radius: 5 5 0 0;" +
-            "}" +
-            ".table-view .column-header {" +
-            "   -fx-background-color: transparent;" +
-            "   -fx-size: 40px;" +
-            "}" +
-            ".table-view .column-header .label {" +
-            "   -fx-text-fill: #bdc3c7;" +
-            "   -fx-font-weight: bold;" +
-            "}" +
-            // Satırlar (Rows)
-            ".table-row-cell {" +
-            "   -fx-background-color: #1e1e1e;" +
-            "   -fx-border-width: 0 0 1 0;" +
-            "   -fx-border-color: #2a2a2a;" +
-            "}" +
-            ".table-row-cell:odd {" +
-            "   -fx-background-color: #252525;" + // Zebra efekti
-            "}" +
-            ".table-row-cell:hover {" +
-            "   -fx-background-color: #333333;" +
-            "}" +
-            ".table-row-cell:selected {" +
-            "   -fx-background-color: #2980b9;" + // Seçili Parlak Mavi
-            "   -fx-background-insets: 0;" +
-            "   -fx-background-radius: 0;" +
-            "}" +
-            // Hücre İçi Yazı
-            ".table-cell {" +
-            "   -fx-text-fill: #ecf0f1;" +
-            "   -fx-alignment: center;" +
-            "   -fx-font-size: 14px;" +
-            "}" +
-            // Scrollbar (Karanlık Mod İçin Özelleştirilmiş)
-            ".scroll-bar:horizontal, .scroll-bar:vertical {" +
-            "   -fx-background-color: transparent;" +
-            "}" +
-            ".scroll-bar:vertical .track, .scroll-bar:horizontal .track {" +
-            "   -fx-background-color: transparent;" +
-            "   -fx-border-color: transparent;" +
-            "}" +
-            ".scroll-bar:vertical .thumb, .scroll-bar:horizontal .thumb {" +
-            "   -fx-background-color: #555;" +
-            "   -fx-background-radius: 5em;" +
-            "}" +
-            // Boş Tablo Yazısı
-            ".table-view .placeholder .label {" +
-            "   -fx-text-fill: #7f8c8d;" +
-            "}";
     }
 
     @SuppressWarnings("unchecked")
